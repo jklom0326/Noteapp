@@ -1,9 +1,12 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-// Room 쓰려면 플러그인 추가
+// Room 플러그인 추가
 apply plugin: 'kotlin-kapt'
-// 네비게이션 쓰려면 플러그인 추가
+// 네비게이션 플러그인 추가
 apply plugin: "androidx.navigation.safeargs.kotlin"
+// parcelize 플러그인
+apply plugin: 'kotlin-parcelize'
+
 
 android {
     compileSdkVersion 30
