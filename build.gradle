@@ -6,10 +6,10 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:4.0.2"
+        classpath "com.android.tools.build:gradle:4.1.2"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
-        // 네비게이션 Safe Args를 추가하렴ㄴ 최상위 gradle에 classpath를 포함해야됌
+        // 네비게이션 Safe Args를 추가하려면 최상위 gradle에 classpath를 포함해야됌
         def nav_version = "2.3.3"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
         // NOTE: Do not place your application dependencies here; they belong

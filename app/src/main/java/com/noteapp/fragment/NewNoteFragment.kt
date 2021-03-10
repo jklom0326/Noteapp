@@ -46,7 +46,7 @@ class NewNoteFragment : Fragment(R.layout.fragment_new_note) {
         mView = view
     }
 
-    private fun  saveNote(view: View){
+    private fun saveNote(view: View){
 
         val noteTitle = binding.etNoteTitle.text.toString().trim()
         val noteBody = binding.etNoteBody.text.toString().trim()
@@ -80,9 +80,9 @@ class NewNoteFragment : Fragment(R.layout.fragment_new_note) {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
         menu.clear()
         inflater.inflate(R.menu.new_note_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onDestroy() {

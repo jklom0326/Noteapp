@@ -34,7 +34,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             container,
             false
         )
-
         return  binding.root
     }
 
@@ -44,12 +43,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         noteViewModel = (activity as MainActivity).noteViewModel
         setUpRecyclerView()
 
-        binding.fbAddNote.setOnClickListener {mView ->
+        binding.fabAddNote.setOnClickListener {mView ->
             mView.findNavController().navigate(R.id.action_homeFragment_to_newNoteFragment)
         }
     }
 
-    private fun setUpRecyclerView(){
+    private fun setUpRecyclerView() {
         noteAdapter = NoteAdapter()
 
         binding.recyclerView.apply {
@@ -57,7 +56,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 2,
                 StaggeredGridLayoutManager.VERTICAL
             )
-
             setHasFixedSize(true)
             adapter = noteAdapter
         }
@@ -68,18 +66,17 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 updateUI(note)
             })
         }
+
     }
 
-    private fun updateUI(note: List<Note>){
-
-        if (note.isNotEmpty()){
+    private fun updateUI(note: List<Note>) {
+        if (note.isNotEmpty()) {
+            binding.cardView.visibility = View.GONE
             binding.recyclerView.visibility = View.VISIBLE
-            binding.tvNoNotesAvailable.visibility = View.GONE
         } else {
+            binding.cardView.visibility = View.VISIBLE
             binding.recyclerView.visibility = View.GONE
-            binding.tvNoNotesAvailable.visibility = View.VISIBLE
         }
-
     }
 
     // 메뉴만드는법
