@@ -67,6 +67,7 @@
         android:clickable="true"
         android:src="@drawable/ic_done"
         android:tintMode="@color/white"
+        android:backgroundTint="@color/colorPrimary"
         app:borderWidth="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

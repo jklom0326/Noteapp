@@ -8,6 +8,7 @@ import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.noteapp.MainActivity
 import com.noteapp.R
 import com.noteapp.databinding.FragmentUpdateNoteBinding
@@ -71,7 +72,7 @@ class UpdateNoteFragment : Fragment() {
     }
 
     private fun deleteNote(){
-        AlertDialog.Builder(activity,R.style.DialogTheme).apply {
+        MaterialAlertDialogBuilder(context as MainActivity).apply {
             setTitle("삭제")
             setMessage("삭제하시겠습니까?")
             setPositiveButton("삭제") {_,_ ->
@@ -81,8 +82,21 @@ class UpdateNoteFragment : Fragment() {
                 )
             }
             setNegativeButton("취소", null)
+        }.show()
 
-        }.create().show()
+
+//        AlertDialog.Builder(activity,R.style.DialogTheme).apply {
+//            setTitle("삭제")
+//            setMessage("삭제하시겠습니까?")
+//            setPositiveButton("삭제") {_,_ ->
+//                noteViewModel.deleteNote(currentNote)
+//                view?.findNavController()?.navigate(
+//                    R.id.action_updateNoteFragment_to_homeFragment
+//                )
+//            }
+//            setNegativeButton("취소", null)
+//
+//        }.create().show()
 
     }
 
