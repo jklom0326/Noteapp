@@ -38,11 +38,28 @@
                     android:textStyle="bold" />
 
                 <View
+                    android:id="@+id/view_color"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <View
                     android:id="@+id/ib_color"
                     android:layout_width="10dp"
                     android:layout_height="10dp"
-                    android:layout_weight="1"
                     android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
                     android:gravity="center" />
 
             </LinearLayout>

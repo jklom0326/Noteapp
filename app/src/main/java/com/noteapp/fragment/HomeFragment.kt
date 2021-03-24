@@ -2,6 +2,7 @@ package com.noteapp.fragment
 
 import android.os.Bundle
 import android.view.*
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
 import androidx.navigation.findNavController
@@ -13,7 +14,8 @@ import com.noteapp.databinding.FragmentHomeBinding
 import com.noteapp.model.Note
 import com.noteapp.viewmodel.NoteViewModel
 
-class HomeFragment : Fragment(R.layout.fragment_home) {
+class HomeFragment : Fragment(R.layout.fragment_home),
+SearchView.OnQueryTextListener{
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -82,12 +84,38 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     // 메뉴만드는법
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
+        menu.clear()
         inflater.inflate(R.menu.home_menu, menu)
+
+        val mMenuSearch = menu.findItem(R.id.menu_search).actionView as SearchView
+        mMenuSearch.isSubmitButtonEnabled = true
+        mMenuSearch.setOnQueryTextListener(this)
     }
 
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        if (query != null) {
+            searchNote(query)
+        }
+        return true
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        if (newText != null) {
+            searchNote(newText)
+        }
+        return true
+    }
+
+    private fun searchNote(query: String?) {
+        val searchQuery = "%$query"
+        noteViewModel.searchNote(searchQuery).observe(this, {
+            noteAdapter.differ.submitList(it)
+        })
     }
 }

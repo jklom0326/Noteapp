@@ -1,5 +1,6 @@
 package com.noteapp.adapter
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
@@ -9,12 +10,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.noteapp.databinding.NoteLayoutAdapterBinding
 import com.noteapp.fragment.HomeFragmentDirections
 import com.noteapp.model.Note
+import java.util.*
 
 class NoteAdapter: RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
 
-    private var binding: NoteLayoutAdapterBinding? = null
-
-    class NoteViewHolder(itemBinding: NoteLayoutAdapterBinding):
+    class NoteViewHolder(val itemBinding: NoteLayoutAdapterBinding):
             RecyclerView.ViewHolder(itemBinding.root)
 
     private val differCallback =
@@ -32,12 +32,11 @@ class NoteAdapter: RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
     val differ = AsyncListDiffer(this, differCallback)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
-        binding = NoteLayoutAdapterBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
+        return NoteViewHolder(
+            NoteLayoutAdapterBinding.inflate(
+                LayoutInflater.from(parent.context), parent, false
+            )
         )
-        return  NoteViewHolder(binding!!)
     }
 
     override fun getItemCount(): Int {
@@ -47,12 +46,18 @@ class NoteAdapter: RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         val currentNote = differ.currentList[position]
 
-        holder.itemView.apply {
+        holder.itemBinding.tvNoteTitle.text = currentNote.noteTitle
+        holder.itemBinding.tvNoteBody.text = currentNote.noteBody
 
-            binding?.tvNoteTitle?.text = currentNote.noteTitle
-            binding?.tvNoteBody?.text = currentNote.noteBody
+            val random = Random()
+            val color = Color.argb(
+                255,
+                random.nextInt(256),
+                random.nextInt(256),
+                random.nextInt(256))
+        holder.itemBinding.ibColor.setBackgroundColor(color)
 
-        }.setOnClickListener { mView ->
+        holder.itemView.setOnClickListener { mView ->
             val direction = HomeFragmentDirections
                 .actionHomeFragmentToUpdateNoteFragment(currentNote)
 
